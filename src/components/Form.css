@@ -42,6 +42,13 @@ button {
     border-radius: 5px;
 }
 
+
+button:hover {
+    background: -webkit-linear-gradient(left, #4bbec9, #b669d7, #d3a8e7);
+    transition: all 0.9s;
+    cursor: pointer;
+}
+
 input{
     width: 100%;
     padding: 0.4vmax;
@@ -76,4 +83,45 @@ label{
     padding-bottom: 1vmax;
     text-align: left;
 
+}
+
+@media only screen and (max-width: 1470px ) {
+    .sub_div {
+        width: 50%;
+    }
+
+    form {
+        padding-top: 15vmax;
+    }
+}
+
+
+@media only screen and (max-width: 900px ) {
+    .sub_div {
+        width: 70%;
+    }
+
+    form {
+        padding-top: 20vmax;
+    }
+}
+
+@media only screen and (max-width: 550px ) {
+    .sub_div {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 370px ) {
+    .sub_div {
+        width: 100%;
+    }
+
+    form {
+        padding-top: 10vmax;
+    }
+
+    body {
+        height: auto;
+    }
 }
