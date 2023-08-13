@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import './Form.css'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
@@ -19,15 +18,18 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-function Form() {
+function Form() {;
 
-    const [data, setdata] = useState();
     const formik = useFormik({
+
+
         initialValues: {
             firstName: '',
             lastName: '',
             email: '',
         },
+
+
         validationSchema: Yup.object({
             firstName: Yup.string()
                 .max(15, 'Must be 15 characters or less')
@@ -37,12 +39,14 @@ function Form() {
                 .required('Required'),
             email: Yup.string().email('Invalid email address').required('Required'),
         }),
+
+
         onSubmit: values => {
             try {
                 const docRef = addDoc(collection(db, "Events"), {
                     values
                 });
-                swal("Good job!", "You clicked the button!", "success");
+                swal("Good job!", "You successfully register yourself!", "success");
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
@@ -52,45 +56,12 @@ function Form() {
 
     });
 
-
-    // const formik = useFormik({
-    //     initialValues: {
-    //         firstName: '',
-    //         lastName: '',
-    //         email: '',
-    //         specialNote: '',
-    //     },
-
-
-    //     validationSchema: Yup.object({
-    //         firstName: Yup.string()
-    //             .required('Required'),
-    //         eventName: Yup.string()
-    //             .required('Required'),
-    //         email: Yup.string().email('Invalid email address').required('Required'),
-    //     }),
-
-
-    //     onSubmit: values => {
-    //         alert(JSON.stringify(values, null, 2));
-    //     },
-
-    // onSubmit: values => {
-    //     alert(JSON.stringify(values, null, 2))
-    // try {
-    //     const docRef = addDoc(collection(db, "Events"), {
-    //         values
-    //     });
-    // } catch (e) {
-    //     console.error("Error adding document: ", e);
-    // }
-
-    // },
-    // });
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className='sub_div'>
+
                 <h1 className='head'>Event Registeration Form</h1>
+
                 <div>
                     <div>
                         <label htmlFor="firstName">First Name</label>
@@ -106,10 +77,11 @@ function Form() {
                         />
                     </div>
                     {formik.touched.firstName && formik.errors.firstName ? (
-                        <div>{formik.errors.firstName}</div>
+                        <div className='error'>{formik.errors.firstName}</div>
                     ) : null}
 
                 </div>
+
                 <div>
                     <div>
                         <label htmlFor="lastName">Last Name</label>
@@ -125,7 +97,7 @@ function Form() {
                         />
                     </div>
                     {formik.touched.lastName && formik.errors.lastName ? (
-                        <div>{formik.errors.lastName}</div>
+                        <div className='error'>{formik.errors.lastName}</div>
                     ) : null}
 
                 </div>
@@ -145,7 +117,7 @@ function Form() {
                         />
                     </div>
                     {formik.touched.email && formik.errors.email ? (
-                        <div>{formik.errors.email}</div>
+                        <div className='error'>{formik.errors.email}</div>
                     ) : null}
                 </div>
 
@@ -167,78 +139,6 @@ function Form() {
                 <button type="submit">Submit</button>
             </div>
         </form>
-
-
-        // <div>
-        //     <form onSubmit={formik.handleSubmit}>
-        //         <div className='sub_div'>
-        //             <h1 className='head'>Event Registeration Form</h1>
-        //             <div>
-        //                 <div>
-        //                     <label htmlFor="firstName">First Name</label>
-        //                 </div>
-        //                 <div>
-        //                     <input
-        //                         id="firstName"
-        //                         name="firstName"
-        //                         type="text"
-        //                         onChange={formik.handleChange}
-        //                         value={formik.values.firstName}
-        //                     />
-        //                 </div>
-        //             </div>
-
-        //             <div>
-        //                 <div>
-        //                     <label htmlFor="lastName">Last Name</label>
-        //                 </div>
-        //                 <div>
-        //                     <input
-        //                         id="lastName"
-        //                         name="lastName"
-        //                         type="text"
-        //                         onChange={formik.handleChange}
-        //                         value={formik.values.lastName}
-        //                     />
-        //                 </div>
-        //             </div>
-
-        //             <div>
-        //                 <div>
-        //                     <label htmlFor="email">Email Address</label>
-        //                 </div>
-        //                 <div>
-        //                     <input
-        //                         id="email"
-        //                         name="email"
-        //                         type="email"
-        //                         onChange={formik.handleChange}
-        //                         value={formik.values.email}
-        //                     />
-        //                 </div>
-        //             </div>
-
-        //             <div>
-        //                 <div>
-        //                     <label htmlFor="specialNote">Special Note</label>
-        //                 </div>
-        //                 <div>
-        //                     <textarea
-        //                         id="specialNote"
-        //                         name="specialNote"
-        //                         rows="7" cols="50"
-        //                         onChange={formik.handleChange}
-        //                         value={formik.values.specialNote}
-        //                     />
-        //                 </div>
-        //             </div>
-
-
-        //             <button type="submit">Submit</button>
-
-        //         </div>
-        //     </form>
-        // </div>
     );
 }
 
